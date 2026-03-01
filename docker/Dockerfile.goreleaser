@@ -1,6 +1,8 @@
-FROM alpine:3.23.3
+FROM alpine:3.23.3@sha256:59855d3dceb3ae53991193bd03301e082b2a7faa56a514b03527ae0ec2ce3a95
 
-RUN apk add --no-cache ca-certificates tzdata
+RUN apk add --no-cache ca-certificates tzdata curl && \
+  addgroup -g 65532 -S nonroot && \
+  adduser -u 65532 -S nonroot -G nonroot
 
 ARG TARGETPLATFORM
 COPY $TARGETPLATFORM/mcp-helm /mcp-helm
@@ -18,6 +20,10 @@ LABEL org.opencontainers.image.title="mcp-helm" \
   org.opencontainers.image.created=$DATE
 
 EXPOSE      8012
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+  CMD curl -f http://localhost:8012/healthz || exit 1
+
 USER        65532:65532
 ENTRYPOINT  [ "/mcp-helm" ]
 CMD         [ "--listen=:8012", "--transport=http" ]
