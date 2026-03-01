@@ -15,12 +15,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   release-please:
+    permissions:
+      contents: write
+      pull-requests: write
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     outputs:
