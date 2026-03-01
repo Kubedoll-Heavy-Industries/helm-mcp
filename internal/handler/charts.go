@@ -371,7 +371,16 @@ func (h *Handler) getNotes() mcp.ToolHandlerFor[getNotesInput, getNotesOutput] {
 
 // extractYAMLPath extracts a value at the given yq-style path from YAML data.
 // Supports paths like ".foo.bar" or ".foo.bar[0]"
-func extractYAMLPath(data []byte, path string) (string, error) {
+func extractYAMLPath(data []byte, path string) (result string, err error) {
+	// Guard against panics in the upstream YAML path parser, which can panic
+	// on malformed path expressions (e.g., unterminated brackets).
+	defer func() {
+		if r := recover(); r != nil {
+			result = ""
+			err = fmt.Errorf("invalid path %q: malformed path expression", path)
+		}
+	}()
+
 	// Handle empty path - return whole document
 	path = strings.TrimPrefix(path, ".")
 	if path == "" {
@@ -394,13 +403,13 @@ func extractYAMLPath(data []byte, path string) (string, error) {
 		return "", fmt.Errorf("invalid path %q: %w", path, err)
 	}
 
-	var result any
-	if err := yp.Read(strings.NewReader(string(data)), &result); err != nil {
+	var yamlResult any
+	if err := yp.Read(strings.NewReader(string(data)), &yamlResult); err != nil {
 		return "", fmt.Errorf("path not found: %q", path)
 	}
 
 	// Marshal the result back to YAML
-	out, err := yaml.Marshal(result)
+	out, err := yaml.Marshal(yamlResult)
 	if err != nil {
 		return "", fmt.Errorf("failed to marshal result: %w", err)
 	}
