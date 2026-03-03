@@ -12,10 +12,10 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/config"
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/handler"
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/helm"
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/server"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/config"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/handler"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/helm"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/server"
 )
 
 // Build information, set by goreleaser.

@@ -8,7 +8,7 @@ import (
 	"github.com/goccy/go-yaml"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/mcputil"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/mcputil"
 )
 
 // Default pagination limits

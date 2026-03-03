@@ -1,4 +1,4 @@
-module github.com/Kubedoll-Heavy-Industries/mcp-helm
+module github.com/Kubedoll-Heavy-Industries/helm-mcp
 
 go 1.25.0
 

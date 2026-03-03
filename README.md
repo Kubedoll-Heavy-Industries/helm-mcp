@@ -1,10 +1,10 @@
 # mcp-helm
 
-[![CI](https://github.com/Kubedoll-Heavy-Industries/mcp-helm/actions/workflows/ci.yml/badge.svg)](https://github.com/Kubedoll-Heavy-Industries/mcp-helm/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/Kubedoll-Heavy-Industries/mcp-helm/branch/main/graph/badge.svg)](https://codecov.io/gh/Kubedoll-Heavy-Industries/mcp-helm)
-[![Go Report Card](https://goreportcard.com/badge/github.com/Kubedoll-Heavy-Industries/mcp-helm)](https://goreportcard.com/report/github.com/Kubedoll-Heavy-Industries/mcp-helm)
-[![Release](https://img.shields.io/github/v/release/Kubedoll-Heavy-Industries/mcp-helm)](https://github.com/Kubedoll-Heavy-Industries/mcp-helm/releases/latest)
-[![License: MIT](https://img.shields.io/github/license/Kubedoll-Heavy-Industries/mcp-helm)](LICENSE)
+[![CI](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/Kubedoll-Heavy-Industries/helm-mcp/branch/main/graph/badge.svg)](https://codecov.io/gh/Kubedoll-Heavy-Industries/helm-mcp)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Kubedoll-Heavy-Industries/helm-mcp)](https://goreportcard.com/report/github.com/Kubedoll-Heavy-Industries/helm-mcp)
+[![Release](https://img.shields.io/github/v/release/Kubedoll-Heavy-Industries/helm-mcp)](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/releases/latest)
+[![License: MIT](https://img.shields.io/github/license/Kubedoll-Heavy-Industries/helm-mcp)](LICENSE)
 
 Give your AI assistant access to real Helm chart data. No more hallucinated `values.yaml` files.
 
@@ -32,7 +32,7 @@ Add this to your editor's MCP config to use our public instance (rate limited, n
 {
   "mcpServers": {
     "helm": {
-      "type": "streamable-http",
+      "type": "http",
       "url": "https://helm-mcp.kubedoll.com/mcp"
     }
   }
@@ -158,14 +158,14 @@ docker pull ghcr.io/kubedoll-heavy-industries/mcp-helm:latest
 **Binary:**
 
 ```bash
-curl -fsSL https://github.com/Kubedoll-Heavy-Industries/mcp-helm/releases/latest/download/mcp-helm_$(uname -s)_$(uname -m).tar.gz | tar xz
+curl -fsSL https://github.com/Kubedoll-Heavy-Industries/helm-mcp/releases/latest/download/mcp-helm_$(uname -s)_$(uname -m).tar.gz | tar xz
 sudo mv mcp-helm /usr/local/bin/
 ```
 
 **Go:**
 
 ```bash
-go install github.com/Kubedoll-Heavy-Industries/mcp-helm/cmd/mcp-helm@latest
+go install github.com/Kubedoll-Heavy-Industries/helm-mcp/cmd/mcp-helm@latest
 ```
 
 ## Self-Hosting

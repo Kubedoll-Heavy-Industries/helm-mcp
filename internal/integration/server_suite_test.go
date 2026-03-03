@@ -15,8 +15,8 @@ import (
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/zap"
 
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/handler"
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/helm"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/handler"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/helm"
 )
 
 // ServerSuite tests the MCP server layer.
