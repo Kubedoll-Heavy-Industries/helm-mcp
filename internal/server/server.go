@@ -59,7 +59,7 @@ func (s *Server) runHTTP(ctx context.Context) error {
 	// Create MCP HTTP handler
 	mcpHandler := mcp.NewStreamableHTTPHandler(
 		func(_ *http.Request) *mcp.Server { return s.mcpServer },
-		&mcp.StreamableHTTPOptions{},
+		&mcp.StreamableHTTPOptions{Stateless: true},
 	)
 
 	// Build router
