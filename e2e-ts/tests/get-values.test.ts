@@ -29,12 +29,18 @@ describe("get_values", () => {
 
     expect(result.isError).toBeFalsy();
     const content = result.content as Array<{ type: string; text: string }>;
-    const parsed = JSON.parse(content[0].text);
+    // Text content is raw YAML, not JSON
+    expect(content[0].text).toBeTruthy();
+    expect(content[0].text).toMatch(/replicaCount|image|service/);
 
-    expect(parsed.version).toBeTruthy();
-    expect(typeof parsed.version).toBe("string");
-    expect(parsed.values).toBeTruthy();
-    expect(typeof parsed.values).toBe("string");
+    // Structured data is in structuredContent
+    const structured = result.structuredContent as {
+      version: string;
+      values: string;
+    };
+    expect(structured.version).toBeTruthy();
+    expect(typeof structured.version).toBe("string");
+    expect(structured.values).toBeTruthy();
   });
 
   it("accepts include_schema parameter", async () => {
@@ -49,10 +55,14 @@ describe("get_values", () => {
 
     expect(result.isError).toBeFalsy();
     const content = result.content as Array<{ type: string; text: string }>;
-    const parsed = JSON.parse(content[0].text);
+    expect(content[0].text).toBeTruthy();
 
-    expect(parsed.version).toBeTruthy();
-    expect(parsed.values).toBeTruthy();
+    const structured = result.structuredContent as {
+      version: string;
+      values: string;
+    };
+    expect(structured.version).toBeTruthy();
+    expect(structured.values).toBeTruthy();
   });
 
   it("narrows to subtree when path is specified", async () => {
@@ -67,10 +77,15 @@ describe("get_values", () => {
 
     expect(result.isError).toBeFalsy();
     const content = result.content as Array<{ type: string; text: string }>;
-    const parsed = JSON.parse(content[0].text);
+    // Text content should contain image-related values
+    expect(content[0].text).toMatch(/repository|tag|pullPolicy/);
 
-    expect(parsed.values).toBeTruthy();
-    expect(parsed.path).toBe(".image");
-    expect(parsed.values).toMatch(/repository|tag|pullPolicy/);
+    const structured = result.structuredContent as {
+      values: string;
+      path: string;
+    };
+    expect(structured.values).toBeTruthy();
+    expect(structured.path).toBe(".image");
+    expect(structured.values).toMatch(/repository|tag|pullPolicy/);
   });
 });
