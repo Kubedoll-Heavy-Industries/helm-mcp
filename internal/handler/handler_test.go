@@ -489,12 +489,11 @@ func TestGetValues(t *testing.T) {
 		})
 
 		assert.NoError(t, err)
-		assert.Nil(t, result)
+		assert.NotNil(t, result)
 		assert.Equal(t, "1.0.0", output.Version)
 		// Output preserves source order and is collapsed with default depth=3
 		assert.Contains(t, output.Values, "image: nginx")
 		assert.Contains(t, output.Values, "replicaCount: 1")
-		assert.True(t, output.Collapsed)
 	})
 
 	t.Run("resolves latest version", func(t *testing.T) {
@@ -514,7 +513,7 @@ func TestGetValues(t *testing.T) {
 		})
 
 		assert.NoError(t, err)
-		assert.Nil(t, result)
+		assert.NotNil(t, result)
 		assert.Equal(t, "2.0.0", output.Version, "resolved version should be included in output")
 		assert.Equal(t, "replicaCount: 2", output.Values)
 		mockSvc.AssertExpectations(t)
@@ -556,7 +555,7 @@ client:
 		})
 
 		assert.NoError(t, err)
-		assert.Nil(t, result)
+		assert.NotNil(t, result)
 		assert.Contains(t, output.Values, "port: 8080")
 		assert.Contains(t, output.Values, "host: localhost")
 	})
@@ -583,10 +582,9 @@ client:
 		})
 
 		assert.NoError(t, err)
-		assert.Nil(t, result)
+		assert.NotNil(t, result)
 		assert.Contains(t, output.Values, "server: object (2 keys)")
 		assert.Contains(t, output.Values, "client: object (1 key)")
-		assert.True(t, output.Collapsed)
 	})
 
 	t.Run("with unlimited depth", func(t *testing.T) {
@@ -608,9 +606,8 @@ value: 123`
 		})
 
 		assert.NoError(t, err)
-		assert.Nil(t, result)
+		assert.NotNil(t, result)
 		assert.Equal(t, yamlContent, output.Values)
-		assert.False(t, output.Collapsed)
 	})
 
 	t.Run("with include_schema true and schema present", func(t *testing.T) {
@@ -632,7 +629,7 @@ value: 123`
 		})
 
 		assert.NoError(t, err)
-		assert.Nil(t, result)
+		assert.NotNil(t, result)
 		assert.Equal(t, `{"type": "object"}`, output.Schema)
 	})
 
@@ -655,7 +652,7 @@ value: 123`
 		})
 
 		assert.NoError(t, err)
-		assert.Nil(t, result)
+		assert.NotNil(t, result)
 		assert.Empty(t, output.Schema)
 	})
 
@@ -716,7 +713,7 @@ value: 123`
 		})
 
 		assert.NoError(t, err)
-		assert.Nil(t, result)
+		assert.NotNil(t, result)
 		assert.Empty(t, output.Schema)
 		mockSvc.AssertNotCalled(t, "GetValuesSchema")
 	})
@@ -752,8 +749,7 @@ value: 123`
 		})
 
 		assert.NoError(t, err)
-		assert.Nil(t, result) // No error - auto-reduced instead
-		assert.True(t, output.Collapsed)
+		assert.NotNil(t, result) // No error - auto-reduced instead
 		assert.LessOrEqual(t, len(output.Values), MaxResponseBytes)
 	})
 

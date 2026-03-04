@@ -106,6 +106,16 @@ func CollapseYAML(data []byte, opts CollapseOptions) (string, bool, error) {
 	return strings.TrimSuffix(sb.String(), "\n"), true, nil
 }
 
+// extractKey returns the raw key text from an AST key node, without inline
+// comments or surrounding quotes. ast.Node.String() includes comments (e.g.
+// "image # @schema ..."), so we use the underlying Value when available.
+func extractKey(node ast.Node) string {
+	if s, ok := node.(*ast.StringNode); ok {
+		return s.Value
+	}
+	return unquoteKey(node.String())
+}
+
 // unquoteKey strips surrounding double or single quotes from a YAML key string.
 // The AST's Key.String() returns the quoted form for keys like "a.b.c", which
 // would render as literal quote characters in the collapsed output.
@@ -132,7 +142,7 @@ func astToOrdered(node ast.Node) interface{} {
 		for _, v := range n.Values {
 			if v.Key != nil {
 				om.entries = append(om.entries, orderedEntry{
-					key:   unquoteKey(v.Key.String()),
+					key:   extractKey(v.Key),
 					value: astToOrdered(v.Value),
 				})
 			}
@@ -142,7 +152,7 @@ func astToOrdered(node ast.Node) interface{} {
 	case *ast.MappingValueNode:
 		// A single mapping value at the document root
 		om := &orderedMap{entries: []orderedEntry{{
-			key:   unquoteKey(n.Key.String()),
+			key:   extractKey(n.Key),
 			value: astToOrdered(n.Value),
 		}}}
 		return om

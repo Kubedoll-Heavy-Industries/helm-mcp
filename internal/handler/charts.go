@@ -51,11 +51,10 @@ type getValuesInput struct {
 }
 
 type getValuesOutput struct {
-	Version   string `json:"version" jsonschema:"Resolved chart version (especially useful when chart_version was omitted and latest was used)"`
-	Values    string `json:"values" jsonschema:"Values content (YAML)"`
-	Path      string `json:"path,omitempty" jsonschema:"Extracted path, if specified"`
-	Collapsed bool   `json:"collapsed,omitempty" jsonschema:"True if deep values were summarized — use a higher depth to expand"`
-	Schema    string `json:"schema,omitempty" jsonschema:"JSON Schema for values (if include_schema=true and schema exists)"`
+	Version string `json:"version" jsonschema:"Resolved chart version (especially useful when chart_version was omitted and latest was used)"`
+	Values  string `json:"values" jsonschema:"Values content (YAML)"`
+	Path    string `json:"path,omitempty" jsonschema:"Extracted path, if specified"`
+	Schema  string `json:"schema,omitempty" jsonschema:"JSON Schema for values (if include_schema=true and schema exists)"`
 }
 
 type getDependenciesInput struct {
@@ -250,14 +249,14 @@ func (h *Handler) getValues() mcp.ToolHandlerFor[getValuesInput, getValuesOutput
 		}
 
 		// Apply collapse transformation, auto-reducing depth if output exceeds limit
-		result, collapsed, err := CollapseYAML(dataToProcess, opts)
+		result, _, err := CollapseYAML(dataToProcess, opts)
 		if err != nil {
 			return mcputil.TextError(fmt.Sprintf("processing values: %v", err)), getValuesOutput{}, nil
 		}
 
 		for len(result)+len(schemaStr) > MaxResponseBytes && opts.MaxDepth > 1 {
 			opts.MaxDepth--
-			result, collapsed, err = CollapseYAML(dataToProcess, opts)
+			result, _, err = CollapseYAML(dataToProcess, opts)
 			if err != nil {
 				return mcputil.TextError(fmt.Sprintf("processing values: %v", err)), getValuesOutput{}, nil
 			}
@@ -272,14 +271,21 @@ func (h *Handler) getValues() mcp.ToolHandlerFor[getValuesInput, getValuesOutput
 		}
 
 		output := getValuesOutput{
-			Version:   version,
-			Values:    result,
-			Path:      path,
-			Collapsed: collapsed,
-			Schema:    schemaStr,
+			Version: version,
+			Values:  result,
+			Path:    path,
+			Schema:  schemaStr,
 		}
 
-		return nil, output, nil
+		// Return raw YAML as text so LLMs read it directly, not wrapped in JSON.
+		textContent := result
+		if schemaStr != "" {
+			textContent += "\n\n--- schema ---\n" + schemaStr
+		}
+
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{&mcp.TextContent{Text: textContent}},
+		}, output, nil
 	}
 }
 
