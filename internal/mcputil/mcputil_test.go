@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/helm"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/helm"
 )
 
 func TestTextError(t *testing.T) {

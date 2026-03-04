@@ -8,7 +8,7 @@
 ## Setup
 
 ```bash
-git clone https://github.com/Kubedoll-Heavy-Industries/mcp-helm.git
+git clone https://github.com/Kubedoll-Heavy-Industries/helm-mcp.git
 cd mcp-helm
 mise install          # Install Go and dev tools
 ```

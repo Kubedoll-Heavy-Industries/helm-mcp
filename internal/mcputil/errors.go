@@ -5,7 +5,7 @@ import (
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/helm"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/helm"
 )
 
 // OperationError provides structured error context for handler operations.

@@ -15,8 +15,8 @@ import (
 	"github.com/stretchr/testify/suite"
 	"go.uber.org/zap"
 
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/handler"
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/helm"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/handler"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/helm"
 )
 
 // ServerSuite tests the MCP server layer.
@@ -311,18 +311,11 @@ func (s *ServerSuite) TestCallTool_GetValues_WithIncludeSchema() {
 		// If it fails, it should be due to size limits, not crashes
 		s.Contains(textContent.Text, "too large", "Error should mention size limit")
 	} else {
-		// If it succeeds, response should have values
+		// If it succeeds, text content should be raw YAML (not JSON)
 		textContent := result.Content[0].(*mcp.TextContent)
-		s.NotEmpty(textContent.Text)
-
-		var response struct {
-			Values string `json:"values"`
-			Schema string `json:"schema"`
-		}
-		err = json.Unmarshal([]byte(textContent.Text), &response)
-		s.Require().NoError(err, "Response should be valid JSON")
-		s.NotEmpty(response.Values, "Should have values")
-		// Schema may or may not be present depending on the chart
+		s.NotEmpty(textContent.Text, "Should have text content")
+		// Structured data is in StructuredContent
+		s.NotNil(result.StructuredContent, "Should have structured content")
 	}
 }
 

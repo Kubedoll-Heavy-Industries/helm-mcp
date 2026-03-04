@@ -12,7 +12,7 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 	"go.uber.org/zap"
 
-	"github.com/Kubedoll-Heavy-Industries/mcp-helm/internal/config"
+	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/config"
 )
 
 // Server wraps the MCP server with HTTP transport and lifecycle management.
@@ -59,7 +59,7 @@ func (s *Server) runHTTP(ctx context.Context) error {
 	// Create MCP HTTP handler
 	mcpHandler := mcp.NewStreamableHTTPHandler(
 		func(_ *http.Request) *mcp.Server { return s.mcpServer },
-		&mcp.StreamableHTTPOptions{},
+		&mcp.StreamableHTTPOptions{Stateless: true},
 	)
 
 	// Build router
