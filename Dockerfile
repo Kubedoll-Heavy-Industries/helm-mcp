@@ -39,12 +39,17 @@ EXPOSE 8012
 
 COPY --from=build /out/mcp-helm /mcp-helm
 
+USER nonroot
+
 ENTRYPOINT ["/mcp-helm"]
 CMD ["--listen=:8012", "--transport=http"]
 
 FROM alpine:3.23.3 AS debug
 
 RUN apk add --no-cache ca-certificates tzdata curl
+
+RUN adduser -D -u 65534 nonroot
+USER nonroot
 
 EXPOSE 8012
 
