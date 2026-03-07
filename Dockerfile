@@ -1,4 +1,4 @@
-ARG GO_VERSION=1.25
+ARG GO_VERSION=1.26
 
 FROM golang:${GO_VERSION}-trixie AS build
 
@@ -39,6 +39,8 @@ EXPOSE 8012
 
 COPY --from=build /out/mcp-helm /mcp-helm
 
+USER nonroot
+
 ENTRYPOINT ["/mcp-helm"]
 CMD ["--listen=:8012", "--transport=http"]
 
@@ -49,6 +51,8 @@ RUN apk add --no-cache ca-certificates tzdata curl
 EXPOSE 8012
 
 COPY --from=build /out/mcp-helm /mcp-helm
+
+USER nobody
 
 ENTRYPOINT ["/mcp-helm"]
 CMD ["--listen=:8012", "--transport=http"]
