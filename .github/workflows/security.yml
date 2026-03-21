@@ -5,11 +5,15 @@ on:
     branches: [main, master]
   pull_request:
   schedule:
-    - cron: '0 6 * * 1'  # Weekly Monday 6am UTC
+    - cron: '0 6 * * 1' # Weekly Monday 6am UTC
 
 permissions:
   contents: read
   security-events: write
+
+env:
+  GRYPE_VERSION: '0.110.0'
+  GRYPE_SHA256: 'aaa98d27d2d7efd9317c6a1ad6d9b15f3e65bab320e7d03bde41e251387bb71c'
 
 jobs:
   govulncheck:
@@ -17,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: Set up Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6
         with:
           go-version: '1.26'
           cache: true
@@ -31,68 +35,53 @@ jobs:
       - name: Run govulncheck
         run: govulncheck ./...
 
-  trivy-fs:
-    name: trivy-filesystem
+  grype-filesystem:
+    name: grype-filesystem
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-      - name: Install Trivy
+      - name: Install Grype (pinned + checksum verified)
         run: |
-          sudo apt-get install -y wget gnupg
-          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
-          echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee /etc/apt/sources.list.d/trivy.list
-          sudo apt-get update
-          sudo apt-get install -y trivy
+          curl -sSfL -o grype.tar.gz "https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/grype_${GRYPE_VERSION}_linux_amd64.tar.gz"
+          echo "${GRYPE_SHA256}  grype.tar.gz" | sha256sum -c -
+          tar -xzf grype.tar.gz -C /usr/local/bin grype
+          rm grype.tar.gz
 
-      - name: Run Trivy vulnerability scanner (filesystem)
-        uses: aquasecurity/trivy-action@0.35.0
-        with:
-          skip-setup-trivy: 'true'
-          scan-type: 'fs'
-          scan-ref: '.'
-          severity: 'CRITICAL,HIGH'
-          exit-code: '0'  # Don't fail the build, just report
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+      - name: Run Grype filesystem scan
+        run: grype dir:. --output sarif --file grype-results.sarif --only-fixed --fail-on critical
 
-      - name: Upload Trivy results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v4
+      - name: Upload results to GitHub Security
+        uses: github/codeql-action/upload-sarif@256d634097be96e792d6764f9edaefc4320557b1 # v4
         if: always()
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: grype-results.sarif
+          category: grype-filesystem
 
-  trivy-config:
-    name: trivy-config
+  grype-config:
+    name: grype-config
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-      - name: Install Trivy
+      - name: Install Grype (pinned + checksum verified)
         run: |
-          sudo apt-get install -y wget gnupg
-          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
-          echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee /etc/apt/sources.list.d/trivy.list
-          sudo apt-get update
-          sudo apt-get install -y trivy
+          curl -sSfL -o grype.tar.gz "https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/grype_${GRYPE_VERSION}_linux_amd64.tar.gz"
+          echo "${GRYPE_SHA256}  grype.tar.gz" | sha256sum -c -
+          tar -xzf grype.tar.gz -C /usr/local/bin grype
+          rm grype.tar.gz
 
-      - name: Run Trivy configuration scanner
-        uses: aquasecurity/trivy-action@0.35.0
-        with:
-          skip-setup-trivy: 'true'
-          scan-type: 'config'
-          scan-ref: '.'
-          exit-code: '0'  # Don't fail the build, just report
-          format: 'sarif'
-          output: 'trivy-config-results.sarif'
+      - name: Run Grype config scan
+        run: grype dir:. --output sarif --file grype-config-results.sarif
 
-      - name: Upload Trivy config results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v4
+      - name: Upload config results to GitHub Security
+        uses: github/codeql-action/upload-sarif@256d634097be96e792d6764f9edaefc4320557b1 # v4
         if: always()
         with:
-          sarif_file: 'trivy-config-results.sarif'
+          sarif_file: grype-config-results.sarif
+          category: grype-config
 
   dependency-review:
     name: dependency-review
@@ -103,10 +92,10 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: Dependency Review
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4.9.0
         with:
           fail-on-severity: high
           comment-summary-in-pr: always
