@@ -2,6 +2,9 @@ name = "mcp-helm"
 main = "cloudflare/src/index.ts"
 compatibility_date = "2025-06-01"
 
+[build]
+command = "pnpm install"
+
 [[routes]]
 pattern = "helm-mcp.kubedoll.com"
 custom_domain = true
