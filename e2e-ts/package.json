@@ -6,7 +6,7 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1",
+    "@modelcontextprotocol/sdk": "^1.28.0",
     "testcontainers": "^11.13.0",
     "typescript": "^5.8.3",
     "vitest": "^4.1.0"
