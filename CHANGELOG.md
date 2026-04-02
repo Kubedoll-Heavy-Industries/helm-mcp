@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.1.4](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/compare/v0.1.3...v0.1.4) (2026-04-01)
+
+
+### Bug Fixes
+
+* **ci:** Bump codecov/codecov-action from 5 to 6 ([1b2a4ea](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/1b2a4ea1c80175daec7709d295b0363fd418525e))
+* **ci:** Bump codecov/codecov-action from 5 to 6 ([687e6b6](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/687e6b6ac9a59b5a10837deaff652163955ddda8))
+* **ci:** Bump jdx/mise-action from 3 to 4 ([c97ce7c](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/c97ce7c71f1e2ee8cd2217e7735e55d911dddda5))
+* **ci:** Bump jdx/mise-action from 3 to 4 ([da90d1e](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/da90d1e7e53f43430fa89f5255b5a1b4288fb3e6))
+* **deploy:** add build command to wrangler.toml ([47efce9](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/47efce9a011e3911dad9af25d274d548a227fcc6))
+* **deploy:** add pnpm install build command to wrangler.toml ([c94b1f2](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/c94b1f272193b588cc4848cc51b4587ca2fc074f))
+* **deps:** Bump @modelcontextprotocol/sdk from 1.27.1 to 1.28.0 in /e2e-ts ([1f6fec8](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/1f6fec8b6e56d5cca5a5b1b265179450a7ecd791))
+* **deps:** Bump @modelcontextprotocol/sdk in /e2e-ts ([d662982](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/d66298297c1760ba2f6eeab4646d38fa0bba70e6))
+* **deps:** Bump testcontainers from 11.12.0 to 11.13.0 in /e2e-ts ([6f483dd](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/6f483dd1f05adf788d7e8dcf1c33ea767f1eba45))
+* **deps:** Bump testcontainers from 11.12.0 to 11.13.0 in /e2e-ts ([3ae68d6](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/3ae68d6866c6498c61e232a1a718dec419274d74))
+* **deps:** Bump typescript from 5.9.3 to 6.0.2 in /e2e-ts ([c577016](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/c57701620fe8cc08fd4de275733955b0b82c94b9))
+* **deps:** Bump typescript from 5.9.3 to 6.0.2 in /e2e-ts ([f8c39c6](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/f8c39c64a7429b89c76769ca492e3c05d1cd762c))
+* **deps:** Bump vitest from 4.1.0 to 4.1.2 in /e2e-ts ([6733cdf](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/6733cdf10442581c07672fcede19da38e3191e9d))
+* **deps:** Bump vitest from 4.1.0 to 4.1.2 in /e2e-ts ([2a1e995](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/commit/2a1e9952768ce1a4dd35050ae85b6128f5ac434e))
+
 ## [0.1.3](https://github.com/Kubedoll-Heavy-Industries/helm-mcp/compare/v0.1.2...v0.1.3) (2026-03-18)
 
 
