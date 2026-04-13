@@ -12,10 +12,12 @@ ARG SOURCE=https://github.com/Kubedoll-Heavy-Industries/helm-mcp
 
 LABEL org.opencontainers.image.title="mcp-helm" \
   org.opencontainers.image.description="MCP server for interacting with Helm repositories and charts" \
+  org.opencontainers.image.licenses="MIT" \
   org.opencontainers.image.source=$SOURCE \
   org.opencontainers.image.version=$VERSION \
   org.opencontainers.image.revision=$COMMIT \
-  org.opencontainers.image.created=$DATE
+  org.opencontainers.image.created=$DATE \
+  io.modelcontextprotocol.server.name="io.github.kubedoll-heavy-industries/helm-mcp"
 
 EXPOSE      8012
 USER        65532:65532
