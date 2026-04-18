@@ -33,7 +33,8 @@ LABEL org.opencontainers.image.title="mcp-helm" \
   org.opencontainers.image.source=$SOURCE \
   org.opencontainers.image.version=$VERSION \
   org.opencontainers.image.revision=$COMMIT \
-  org.opencontainers.image.created=$DATE
+  org.opencontainers.image.created=$DATE \
+  io.modelcontextprotocol.server.name="io.github.kubedoll-heavy-industries/helm-mcp"
 
 EXPOSE 8012
 
