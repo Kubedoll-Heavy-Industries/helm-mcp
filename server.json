@@ -17,7 +17,7 @@
   "packages": [
     {
       "registryType": "oci",
-      "identifier": "ghcr.io/kubedoll-heavy-industries/mcp-helm:v0.1.4",
+      "identifier": "ghcr.io/kubedoll-heavy-industries/mcp-helm:v0.1.4@sha256:63f1504c7019726ff25caece480eabf69a015304fef5ccd80a8fd278d7ade71f",
       "transport": {
         "type": "stdio"
       }
