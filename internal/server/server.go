@@ -12,7 +12,7 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 	"go.uber.org/zap"
 
-	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/config"
+	"github.com/kubedoll-heavy-industries/helm-mcp/internal/config"
 )
 
 // Server wraps the MCP server with HTTP transport and lifecycle management.

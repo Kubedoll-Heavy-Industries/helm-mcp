@@ -1,7 +1,6 @@
 import { describe, it, expect, inject, beforeAll, afterAll } from "vitest";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
-import { McpError } from "@modelcontextprotocol/sdk/types.js";
 
 const baseUrl = inject("baseUrl");
 
@@ -20,19 +19,17 @@ afterAll(async () => {
 });
 
 describe("error handling", () => {
-  it("rejects search_charts when repository_url is missing", async () => {
-    await expect(
-      client.callTool({ name: "search_charts", arguments: {} }),
-    ).rejects.toThrow(McpError);
+  it("returns isError when search_charts repository_url is missing", async () => {
+    const result = await client.callTool({ name: "search_charts", arguments: {} });
+    expect(result.isError).toBe(true);
   });
 
-  it("rejects get_versions when chart_name is missing", async () => {
-    await expect(
-      client.callTool({
-        name: "get_versions",
-        arguments: { repository_url: "https://prometheus-community.github.io/helm-charts" },
-      }),
-    ).rejects.toThrow(McpError);
+  it("returns isError when get_versions chart_name is missing", async () => {
+    const result = await client.callTool({
+      name: "get_versions",
+      arguments: { repository_url: "https://prometheus-community.github.io/helm-charts" },
+    });
+    expect(result.isError).toBe(true);
   });
 
   it("returns isError for chart not found", async () => {

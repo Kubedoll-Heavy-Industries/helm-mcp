@@ -12,7 +12,7 @@ COPY . .
 ARG VERSION=dev
 ARG COMMIT=none
 ARG DATE=unknown
-ARG SOURCE=https://github.com/Kubedoll-Heavy-Industries/helm-mcp
+ARG SOURCE=https://github.com/kubedoll-heavy-industries/helm-mcp
 ARG TARGETARCH=amd64
 
 RUN --mount=type=cache,target=/root/.cache/go-build \
@@ -25,7 +25,7 @@ FROM gcr.io/distroless/static-debian12:nonroot AS runtime
 ARG VERSION=dev
 ARG COMMIT=none
 ARG DATE=unknown
-ARG SOURCE=https://github.com/Kubedoll-Heavy-Industries/helm-mcp
+ARG SOURCE=https://github.com/kubedoll-heavy-industries/helm-mcp
 
 LABEL org.opencontainers.image.title="mcp-helm" \
   org.opencontainers.image.description="MCP server for interacting with Helm repositories and charts" \

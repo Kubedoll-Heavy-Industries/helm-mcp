@@ -19,7 +19,7 @@ target "_common" {
     DATE    = "unknown"
   }
   labels = {
-    "org.opencontainers.image.source" = "https://github.com/Kubedoll-Heavy-Industries/helm-mcp"
+    "org.opencontainers.image.source" = "https://github.com/kubedoll-heavy-industries/helm-mcp"
   }
 }
 

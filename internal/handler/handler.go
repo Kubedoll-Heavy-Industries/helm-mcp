@@ -11,8 +11,8 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 	"go.uber.org/zap"
 
-	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/helm"
-	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/mcputil"
+	"github.com/kubedoll-heavy-industries/helm-mcp/internal/helm"
+	"github.com/kubedoll-heavy-industries/helm-mcp/internal/mcputil"
 )
 
 // Handler provides MCP tool handlers backed by a Helm service.
