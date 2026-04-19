@@ -11,8 +11,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap"
 
-	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/helm"
-	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/helm/mocks"
+	"github.com/kubedoll-heavy-industries/helm-mcp/internal/helm"
+	"github.com/kubedoll-heavy-industries/helm-mcp/internal/helm/mocks"
 )
 
 func TestNew(t *testing.T) {

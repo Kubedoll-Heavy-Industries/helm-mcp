@@ -35,7 +35,7 @@ formatters:
   settings:
     goimports:
       local-prefixes:
-        - github.com/Kubedoll-Heavy-Industries/helm-mcp
+        - github.com/kubedoll-heavy-industries/helm-mcp
 
 issues:
   max-issues-per-linter: 0

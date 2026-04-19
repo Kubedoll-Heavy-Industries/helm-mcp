@@ -6,7 +6,7 @@ import (
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 
-	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/mcputil"
+	"github.com/kubedoll-heavy-industries/helm-mcp/internal/mcputil"
 )
 
 // Default pagination limit for versions

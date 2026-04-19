@@ -1,6 +1,6 @@
 {
   "extends": [
-    "github>Kubedoll-Heavy-Industries/renovate-config",
-    "github>Kubedoll-Heavy-Industries/renovate-config:automerge-github-actions"
+    "github>kubedoll-heavy-industries/renovate-config",
+    "github>kubedoll-heavy-industries/renovate-config:automerge-github-actions"
   ]
 }
