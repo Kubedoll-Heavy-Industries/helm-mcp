@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
-	"github.com/Kubedoll-Heavy-Industries/helm-mcp/internal/helm"
+	"github.com/kubedoll-heavy-industries/helm-mcp/internal/helm"
 )
 
 // ChartService is a mock implementation of helm.ChartService.

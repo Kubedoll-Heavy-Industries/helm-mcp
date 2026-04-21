@@ -4,7 +4,7 @@
   "title": "Helm MCP",
   "description": "Give your AI assistant access to real Helm chart data. No more hallucinated values.yaml files.",
   "repository": {
-    "url": "https://github.com/Kubedoll-Heavy-Industries/helm-mcp",
+    "url": "https://github.com/kubedoll-heavy-industries/helm-mcp",
     "source": "github"
   },
   "version": "0.1.4",
@@ -12,6 +12,15 @@
     {
       "type": "streamable-http",
       "url": "https://helm-mcp.kubedoll.com/mcp"
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/kubedoll-heavy-industries/mcp-helm:v0.1.4@sha256:63f1504c7019726ff25caece480eabf69a015304fef5ccd80a8fd278d7ade71f",
+      "transport": {
+        "type": "stdio"
+      }
     }
   ]
 }
