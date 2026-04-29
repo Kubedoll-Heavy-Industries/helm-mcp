@@ -24,7 +24,7 @@ describe("search_charts", () => {
   it("finds alertmanager in prometheus-community repo", async () => {
     const result = await client.callTool({
       name: "search_charts",
-      arguments: { repository_url: REPO_URL, search: "alertmanager" },
+      arguments: { repository_url: REPO_URL, keyword: "alertmanager" },
     });
 
     expect(result.isError).toBeFalsy();
