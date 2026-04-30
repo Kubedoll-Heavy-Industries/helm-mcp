@@ -37,7 +37,7 @@ func (h *Handler) Register(s *mcp.Server) {
 	// Search for charts in a repository
 	mcputil.RegisterTool(s, mcputil.ToolDef{
 		Name:        "search_charts",
-		Description: "Search for charts in a Helm repository. Note: OCI registries (oci://) do not support browsing; use get_values or get_versions with a specific chart name instead.",
+		Description: "List or search charts in a Helm repository. Provide a repository_url, then optionally filter by keyword (e.g. keyword='postgres'). Note: OCI registries (oci://) do not support browsing; use get_values or get_versions with a specific chart name instead.",
 		ReadOnly:    true,
 		OpenWorld:   true,
 	}, h.searchCharts())

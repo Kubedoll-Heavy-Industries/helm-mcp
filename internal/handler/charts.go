@@ -29,7 +29,7 @@ const (
 
 type searchChartsInput struct {
 	RepositoryURL string `json:"repository_url" jsonschema:"Helm repository URL (e.g. https://charts.bitnami.com/bitnami) or OCI registry (e.g. oci://ghcr.io/traefik/helm)"`
-	Search        string `json:"search,omitempty" jsonschema:"Filter by name (case-insensitive substring)"`
+	Keyword       string `json:"keyword,omitempty" jsonschema:"Filter charts by name (case-insensitive substring match, e.g. 'postgres')"`
 	Limit         int    `json:"limit,omitempty" jsonschema:"Maximum results (default 50, max 200)"`
 }
 
@@ -120,8 +120,8 @@ func (h *Handler) searchCharts() mcp.ToolHandlerFor[searchChartsInput, searchCha
 		})
 
 		// Apply search filter
-		if in.Search != "" {
-			search := strings.ToLower(in.Search)
+		if in.Keyword != "" {
+			search := strings.ToLower(in.Keyword)
 			filtered := make([]string, 0, len(charts))
 			for _, c := range charts {
 				if strings.Contains(strings.ToLower(c), search) {

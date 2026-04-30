@@ -295,7 +295,7 @@ func TestSearchCharts(t *testing.T) {
 
 		result, output, err := handler(ctx, nil, searchChartsInput{
 			RepositoryURL: "https://repo.com",
-			Search:        "redis",
+			Keyword:       "redis",
 		})
 
 		assert.NoError(t, err)
