@@ -7,7 +7,7 @@
     "url": "https://github.com/kubedoll-heavy-industries/helm-mcp",
     "source": "github"
   },
-  "version": "0.1.4",
+  "version": "0.1.5",
   "remotes": [
     {
       "type": "streamable-http",
@@ -17,7 +17,7 @@
   "packages": [
     {
       "registryType": "oci",
-      "identifier": "ghcr.io/kubedoll-heavy-industries/mcp-helm:v0.1.4@sha256:63f1504c7019726ff25caece480eabf69a015304fef5ccd80a8fd278d7ade71f",
+      "identifier": "ghcr.io/kubedoll-heavy-industries/mcp-helm:v0.1.5@sha256:f03884d5c3df10fc6228d39021279fcc6b86c31352df13387943f289864a2231",
       "transport": {
         "type": "stdio"
       }
