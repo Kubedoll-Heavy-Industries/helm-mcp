@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/kubedoll-heavy-industries/helm-mcp/compare/v0.1.4...v0.1.5) (2026-04-30)
+
+
+### Bug Fixes
+
+* trigger v0.1.5 release ([#52](https://github.com/kubedoll-heavy-industries/helm-mcp/issues/52)) ([8cd1db9](https://github.com/kubedoll-heavy-industries/helm-mcp/commit/8cd1db938d7f00432ca6890c6d9cfa8c709790ad))
+
 ## [0.1.4](https://github.com/kubedoll-heavy-industries/helm-mcp/compare/v0.1.3...v0.1.4) (2026-04-18)
 
 
