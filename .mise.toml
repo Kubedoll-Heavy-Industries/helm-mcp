@@ -5,7 +5,6 @@ act = "latest"
 "go:golang.org/x/tools/cmd/goimports" = "latest"
 "ubi:air-verse/air" = "latest"
 node = "latest"
-"npm:@modelcontextprotocol/inspector" = "latest"
 "pipx:pre-commit" = "latest"
 
 [tasks.setup]
@@ -49,4 +48,4 @@ run = "go build -o tmp/mcp-helm ./cmd/mcp-helm"
 run = "air"
 
 [tasks.inspector]
-run = "mcp-inspector --config inspector-config.json --server mcp-helm"
+run = "pnpm exec mcp-inspector --config inspector-config.json --server mcp-helm"
