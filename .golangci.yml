@@ -27,6 +27,11 @@ linters:
         - all
         - -ST1000
         - -ST1003
+        # SA1019 flags mcp.LoggingLevel / session.Log, deprecated by SEP-2577.
+        # The API remains functional during the deprecation window and is still
+        # used for best-effort client notifications; drop this exclusion when
+        # the codebase migrates off MCP logging.
+        - -SA1019
 
 formatters:
   enable:
