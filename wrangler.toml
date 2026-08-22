@@ -22,3 +22,7 @@ class_name = "McpHelmContainer"
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["McpHelmContainer"]
+
+[observability.logs]
+enabled = true
+invocation_logs = true
