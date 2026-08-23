@@ -1,4 +1,6 @@
-.git
+# .git is intentionally NOT excluded: the Go toolchain stamps VCS
+# revision/time into the binary (-buildvcs) so container builds are
+# self-identifying. Only the build stage sees it; runtime is distroless.
 .github
 .devcontainer
 .vscode
