@@ -1,15 +1,13 @@
 {
   "name": "mcp-helm-cloudflare",
   "private": true,
+  "packageManager": "pnpm@9.14.4",
   "dependencies": {
     "@cloudflare/containers": "^0.3.7"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260821.1",
     "@modelcontextprotocol/inspector": "^2.3.0"
-  },
-  "overrides": {
-    "pino@^9.14.0": "^10.3.1"
   },
   "pnpm": {
     "overrides": {

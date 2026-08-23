@@ -1,6 +1,6 @@
 ARG GO_VERSION=1.26.6
 
-FROM golang:${GO_VERSION}-trixie AS build
+FROM golang:${GO_VERSION}-trixie@sha256:b75d466dd608587fd66cca705a307ba65b889827d06ad61d6a75f0482b51b7c7 AS build
 
 WORKDIR /src
 
@@ -20,7 +20,7 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
   go build -p=1 -trimpath -ldflags "-s -w -X main.version=${VERSION} -X main.commit=${COMMIT} -X main.date=${DATE}" \
   -o /out/mcp-helm ./cmd/mcp-helm
 
-FROM gcr.io/distroless/static-debian12:nonroot AS runtime
+FROM gcr.io/distroless/static-debian12:nonroot@sha256:afa5c872c891853ca7fcf1f12c3edb23f7eeef36189728842dd51042ff57f7ab AS runtime
 
 ARG VERSION=dev
 ARG COMMIT=none
@@ -47,7 +47,7 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD ["/mcp
 ENTRYPOINT ["/mcp-helm"]
 CMD ["--listen=:8012", "--transport=http"]
 
-FROM alpine:3.24.1 AS debug
+FROM alpine:3.24.1@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b AS debug
 
 RUN apk add --no-cache ca-certificates tzdata curl
 

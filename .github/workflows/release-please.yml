@@ -15,9 +15,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   release-please:
@@ -58,9 +56,7 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            e2e-ts/package-lock.json
+          cache-dependency-path: e2e-ts/package-lock.json
 
       - name: Verify Go modules
         run: go mod verify

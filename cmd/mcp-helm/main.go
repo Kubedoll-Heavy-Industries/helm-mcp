@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"runtime/debug"
 	"syscall"
 	"time"
 
@@ -20,12 +21,41 @@ import (
 	"github.com/kubedoll-heavy-industries/helm-mcp/internal/server"
 )
 
-// Build information, set by goreleaser.
+// Build information, set by goreleaser via ldflags. When not provided
+// (e.g. container builds), commit and date fall back to the VCS info
+// stamped by the Go toolchain at build time.
 var (
 	version = "dev"
 	commit  = "none"
 	date    = "unknown"
 )
+
+// resolveBuildInfo backfills commit/date from toolchain VCS stamping
+// (-buildvcs) when ldflags were not supplied.
+func resolveBuildInfo() {
+	info, ok := debug.ReadBuildInfo()
+	if !ok {
+		return
+	}
+	var rev, t string
+	for _, s := range info.Settings {
+		switch s.Key {
+		case "vcs.revision":
+			rev = s.Value
+		case "vcs.time":
+			t = s.Value
+		}
+	}
+	if rev == "" {
+		return
+	}
+	if commit == "none" || commit == "" {
+		commit = rev
+	}
+	if date == "unknown" || date == "" {
+		date = t
+	}
+}
 
 const defaultHealthcheckURL = "http://127.0.0.1:8012/healthz"
 
@@ -40,6 +70,9 @@ func run() error {
 	if len(os.Args) > 1 && os.Args[1] == "healthcheck" {
 		return runHealthcheck()
 	}
+
+	// Resolve build info (ldflags take precedence, VCS stamping as fallback)
+	resolveBuildInfo()
 
 	// Load configuration
 	cfg, err := config.Load()
