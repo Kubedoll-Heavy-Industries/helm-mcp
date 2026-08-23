@@ -1,3 +1,9 @@
 # Helm v4.2.2 pulls oras-go/v2 v2.6.1, and CVE-2026-50163 has no patched
 # v2 release available. Keep the exception narrow and track removal in #95.
 CVE-2026-50163
+
+# Review advisory against golang.org/x/crypto/openpgp (unmaintained upstream).
+# Unfixed by design, applies to every x/crypto version, UNKNOWN severity.
+# We never import x/crypto/openpgp (govulncheck enforces reachability);
+# x/crypto remains as a transitive dep of helm/k8s libs.
+GO-2026-5932
