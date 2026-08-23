@@ -120,8 +120,8 @@ jobs:
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: "22"
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          # No package cache: this job only runs audit commands and never
+          # installs root dependencies, so there is no pnpm store to save.
 
       - name: Audit root dependencies (pnpm-lock.yaml, includes overrides)
         run: pnpm audit
