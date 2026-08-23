@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.7](https://github.com/kubedoll-heavy-industries/helm-mcp/compare/v0.1.6...v0.1.7) (2026-08-23)
+
+
+### Bug Fixes
+
+* **ci:** ignore unfixed x/crypto/openpgp advisory; sync npm lockfile ([894fffb](https://github.com/kubedoll-heavy-industries/helm-mcp/commit/894fffba324af6b1dae2f1b04ed009f4dec9a855))
+* **ci:** use trusted-published pino for MCP inspector; pin tools via mise.lock ([b16340b](https://github.com/kubedoll-heavy-industries/helm-mcp/commit/b16340b7f24702919d77a84f79678044be18b0d7))
+
+
+### Dependencies
+
+* refresh toolchain and dependencies ([eca7670](https://github.com/kubedoll-heavy-industries/helm-mcp/commit/eca76707392ccb4b42aba5fe1c1b6bfaf2b8067d))
+* sync root package-lock with workers-types bump ([04caf2a](https://github.com/kubedoll-heavy-industries/helm-mcp/commit/04caf2a640498635a7c805276198f6505e0106e9))
+
 ## [0.1.6](https://github.com/kubedoll-heavy-industries/helm-mcp/compare/v0.1.5...v0.1.6) (2026-07-03)
 
 
