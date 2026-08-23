@@ -1,6 +1,7 @@
 {
   "name": "mcp-helm-cloudflare",
   "private": true,
+  "packageManager": "pnpm@9.14.4",
   "dependencies": {
     "@cloudflare/containers": "^0.3.7"
   },
