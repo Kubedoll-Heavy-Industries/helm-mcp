@@ -26,16 +26,21 @@ Compare `<sha>` against `git log origin/main -1`.
 
 Liveness: `GET /healthz` returns 200.
 
-## Rate limiting (recommended one-time dashboard step)
+## Rate limiting
 
-The public endpoint has no auth by design. Add a Cloudflare WAF rate-limit
-rule so a single client cannot exhaust container instances:
+A zone WAF rate-limiting rule protects the public endpoint (created via API
+on 2026-08-23, rule id `d7842ad53eef4709ad948fccda073cbb` in the
+`http_ratelimit` phase for kubedoll.com):
 
-1. dash.cloudflare.com → kubedoll.com zone → **Security → WAF → Rate limiting rules**
-2. Create rule: match `http.host eq "helm-mcp.kubedoll.com"`, count both
-   `/mcp` and `/healthz`, threshold ~120 requests / 1 minute / per IP,
-   action Block (10 min).
-3. Free plan includes one rule; keep it reserved for this host.
+- Match: `http.host eq "helm-mcp.kubedoll.com"`
+- Threshold: **20 requests / 10 s / per IP per colo**, counting
+  origin-bound requests (`requests_to_origin`)
+- Action: block for the mitigation timeout
+
+Free-plan entitlements cap the window and mitigation timeout at 10 s and
+allow a single rule; if the account moves to Pro+, raise this to ~120/min
+with a 10-minute block (edit the rule in dash → Security → WAF → Rate
+limiting rules, or PUT the same ruleset endpoint).
 
 ## Container egress
 
